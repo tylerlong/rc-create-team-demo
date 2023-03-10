@@ -2,12 +2,16 @@
   "license": "UNLICENSED",
   "version": "0.1.0",
   "scripts": {
-    "test": "ts-node src/index.ts"
+    "test": "ts-node -r dotenv-override-true/config src/index.ts"
+  },
+  "dependencies": {
+    "@rc-ex/core": "^1.1.0"
   },
   "devDependencies": {
     "@types/node": "^18.15.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
+    "dotenv-override-true": "^6.2.2",
     "eslint": "^8.35.0",
     "eslint-config-alloy": "^4.9.0",
     "eslint-config-prettier": "^8.7.0",

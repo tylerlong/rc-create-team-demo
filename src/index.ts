@@ -12,8 +12,17 @@ const main = async () => {
     jwt: process.env.RINGCENTRAL_JWT_TOKEN!,
   });
 
-  const r = await rc.get('/restapi/v1.0/glip/chats');
-  console.log(r.data);
+  // list all chats
+  const r = await rc.teamMessaging().chats().list({ recordCount: 20 });
+  for (const chat of r.records ?? []) {
+    console.log('Processing', chat.name, '-', chat.description);
+    const r2 = await rc.teamMessaging().chats(chat.id).posts().list({ recordCount: 20 });
+    console.log('Latest 20 message in the chat:', r2);
+    console.log('Finished processing', chat.name, '-', chat.description);
+  }
+
+  // const r = await rc.get('/restapi/v1.0/glip/chats');
+  // console.log(r.data);
 
   // // OR password flow
   // await rc.authorize({

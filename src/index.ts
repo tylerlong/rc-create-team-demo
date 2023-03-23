@@ -16,9 +16,9 @@ const main = async () => {
   const r = await rc.teamMessaging().chats().list({ recordCount: 20 });
   for (const chat of r.records ?? []) {
     console.log('Processing', chat.name, '-', chat.description);
+    // fetch posts in the chat
     const r2 = await rc.teamMessaging().chats(chat.id).posts().list({ recordCount: 20 });
     console.log('Latest 20 message in the chat:', r2);
-    console.log('Finished processing', chat.name, '-', chat.description);
   }
 
   // const r = await rc.get('/restapi/v1.0/glip/chats');

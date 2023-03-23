@@ -12,11 +12,11 @@ const main = async () => {
     jwt: process.env.RINGCENTRAL_JWT_TOKEN!,
   });
 
-  // list all chats
+  // list all (no more than 20) chats
   const r = await rc.teamMessaging().chats().list({ recordCount: 20 });
   for (const chat of r.records ?? []) {
     console.log('Processing', chat.name, '-', chat.description);
-    // fetch posts in the chat
+    // fetch posts (no more than 20) in the chat
     const r2 = await rc.teamMessaging().chats(chat.id).posts().list({ recordCount: 20 });
     console.log('Latest 20 message in the chat:', r2);
   }
